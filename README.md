@@ -30,6 +30,7 @@ Command line-parameters:
  - *--bins [-m]*: Number of bins in which to hash the data. A smaller number of bins will increase the number of collisions, producing larger clusters.
  - *--numrows [-n]*: Number of times to hash the individual elements. A larger number will diversify the signatures, increasing the likelihood that similar elements will be hashed together. Put another way, this is the number of bits in the signatures.
  - *--bands [-b]*: Number of bands in which to split the signatures. Each band will have (n / b) elements. A smaller number of bands will increase the confidence in element similiarity.
+ - *--threshold [-t]*: Target threshold. It can be used instead of bands. The parameters tuning is done automatically.
  - *--minbucketsize [-c]*: Minimum allowable bucket size. Any buckets with fewer than this many elements will be dropped entirely.
 
 Other parameters:
