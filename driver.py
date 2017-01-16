@@ -34,8 +34,8 @@ if __name__ == "__main__":
         help = "Number of bands. Each band will have (n / b) elements. Larger " +
             "numbers of elements increase confidence in element similarity")
     parser.add_argument("-t", "--threshold", type = float,
-        help = "Number of bands. Each band will have (n / b) elements. Larger " +
-            "numbers of elements increase confidence in element similarity")
+        help = "Target threshold. It can be used instead of bands. The parameters" + 
+            "tuning is done automatically.")
     parser.add_argument("-c", "--minbucketsize", type = int, default = 2,
         help = "Minimum bucket size (0 to disable). Buckets with fewer than this " +
             "number of elements will be dropped. [DEFAULT: 2]")
