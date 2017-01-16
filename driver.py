@@ -30,9 +30,12 @@ if __name__ == "__main__":
         help = "Number of times to hash the elements. Larger numbers diversify " +
             "signatures, increasing likelihood similar vectors will be hashed together. " +
             "This is also the length of the signature. [DEFAULT: 1000]")
-    parser.add_argument("-b", "--bands", type = int, default = 25,
+    parser.add_argument("-b", "--bands", type = int,
         help = "Number of bands. Each band will have (n / b) elements. Larger " +
-            "numbers of elements increase confidence in element similarity. [DEFAULT: 25]")
+            "numbers of elements increase confidence in element similarity")
+    parser.add_argument("-t", "--threshold", type = float,
+        help = "Number of bands. Each band will have (n / b) elements. Larger " +
+            "numbers of elements increase confidence in element similarity")
     parser.add_argument("-c", "--minbucketsize", type = int, default = 2,
         help = "Minimum bucket size (0 to disable). Buckets with fewer than this " +
             "number of elements will be dropped. [DEFAULT: 2]")
@@ -43,6 +46,8 @@ if __name__ == "__main__":
     # Read the input data.
     data = read_text(sc, args['input'])
     p = 65537
-    m, n, b, c = args['bins'], args['numrows'], args['bands'], args['minbucketsize']
+    m, n, b, t, c = args['bins'], args['numrows'], args['bands'], args['threshold'], args['minbucketsize']
+    model = lsh.PyLSHModel(budget=n, min_clusters=c, target_threshold=t, n_bands=b)
+    model.run(data, p, m)
     model = lsh.run(data, p, m, n, b, c)
     print 'Found %s clusters.' % model.buckets.count()
