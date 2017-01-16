@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import numpy as np
 
 from pyspark.mllib.linalg import SparseVector
@@ -29,12 +31,14 @@ def minhash(v, a, b, p, m):
         Integer minhash value that is in [0, buckets).
     """
     indices = None
+    
     if type(v) is SparseVector:
-        indices = v.indices
+        indices = v.indices  
     elif type(v) is np.ndarray or type(v) is list:
         indices = np.arange(len(v), dtype = np.int)
+        indices = indices[v == True]
     else:
         raise Exception("Unknown array type '%s'." % type(v))
-
+        
     # Map the indices to hash values and take the minimum.
-    return np.array((((a * indices) + b) % p) % m).min()
+    return ((((a * indices) + b) % p) % m).min()
