@@ -49,5 +49,4 @@ if __name__ == "__main__":
     m, n, b, t, c = args['bins'], args['numrows'], args['bands'], args['threshold'], args['minbucketsize']
     model = lsh.PyLSHModel(budget=n, min_clusters=c, target_threshold=t, n_bands=b)
     model.run(data, p, m)
-    model = lsh.run(data, p, m, n, b, c)
     print 'Found %s clusters.' % model.buckets.count()
